@@ -4,7 +4,7 @@
 This study aims to find the best model to detect unworn CNC machines. The dataset results from the University of Michigan experiments on a CNC milling machine in the System-level Manufacturing and Automation Research Testbed (SMART), while the machine ran to make a "S" shape(S for smart manufacturing ) in 2" x 2" x 1.5" wax blocks.
 
 ## Data describtion<br>
-This project used a CNC milling machine to perform machining experiments. The CNC machine recorded machining data for different settings of "tool condition", "feed rate", and "clamping pressure". More details about the dataset can be found here.<br>
+This project used a CNC milling machine to perform machining experiments. The CNC machine recorded machining data for different settings of "tool condition", "feed rate", and "clamping pressure". More details about the dataset can be found [here](https://www.kaggle.com/datasets/shasun/tool-wear-detection-in-cnc-mill/data).<br>
 The CNC machine had 4 motors (X, Y, Z axes and spindle) that generated time series data with a 100 ms interval in 18 machining experiments. The output of each experiment showed the tool condition (whether the tool was worn or not) and the result of visual inspection. This dataset is useful for finding tool wear or poor clamping.
 
 ## Data collection
