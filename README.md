@@ -73,7 +73,13 @@ For the binary-valued columns, tool_condition, machining_finalized, and passed_v
 ## Training Model
 To train the model, I used four different methods, "Random Forest Classifier", "Decision Tree", "XGBoost", and a simple RNN model. Except for the RNN model, I used both data frames `frequent_encoding_data.csv` and `onehot_encoding_data.csv`. Since the accuracy and other metrics were high for both data, I prefer to consider the confusion matrix as my criterion for choosing the best method. You can see the results in the following table.<br>
 
-
+<div align="center">
+ 
+|Data frame|Random Forest Classifie|Decision Tree|XGBoost| RNN |
+|   :---:  |      :---:            |      :---:  | :---: |:---:|
+|forfrequent_encoding_data|[[2336,   12],<br/> [  10, 2700]]|[[2330,   18],<br/> [  21, 2689]]|[[2346,    2],<br/> [   3, 2707]]|[[ 236, 2211],<br/> [  60, 2551]]
+|onehot_encoding_data     |[[2409,    9],<br/> [  19, 2621]]|[[2397,   21],<br/> [  34, 2606]]|[[2415,    3],<br/> [   8, 2632]]|
+</div>
 
 
 
