@@ -1,10 +1,9 @@
 # CNC-Tool-wear-detection<br>
 ### Table of content
-[Purpose of study](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#purpose-of-study)<br>
-[Data description](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#data-describtion)<br>
-[Data collection](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#data-collection)<br>
-[Data collection](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#data-collection)<br>
-[EDA](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#eda)
+- [Purpose of study](#purpose-of-study)
+- [Data description](#data-description)
+- [Data Collection](#data-collection)
+- [EDA](#eda)
 
 ## Purpose of study
 This study aims to find the best model to detect unworn CNC machines. The dataset results from the University of Michigan experiments on a CNC milling machine in the System-level Manufacturing and Automation Research Testbed (SMART), while the machine ran to make a "S" shape(S for smart manufacturing ) in 2" x 2" x 1.5" wax blocks.<br>
