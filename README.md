@@ -1,15 +1,16 @@
 # CNC-Tool-wear-detection<br>
 ### Table of content
-[Purpose of study](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#purpose-of-study)<br>
-[Data description](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#data-describtion)<br>
-[Data collection](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#data-collection)<br>
-[Data collection](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#data-collection)<br>
-[EDA](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/edit/main/README.md#eda)
+- [Purpose of study](#purpose-of-study)
+- [Data description](#data-description)
+- [Data Collection](#data-collection)
+- [EDA](#eda)
+- -[Training Model](#training-model)
 
 ## Purpose of study
 This study aims to find the best model to detect unworn CNC machines. The dataset results from the University of Michigan experiments on a CNC milling machine in the System-level Manufacturing and Automation Research Testbed (SMART), while the machine ran to make a "S" shape(S for smart manufacturing ) in 2" x 2" x 1.5" wax blocks.<br>
-![test_artifact](https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/assets/65620341/af1e314d-54e5-42d3-a14f-0599b43d3a51)
-
+<div align="center">
+ <image width=200 src="https://github.com/fereshteh-bahadory/CNC-Tool-wear-detection/assets/65620341/af1e314d-54e5-42d3-a14f-0599b43d3a51">
+</div>
 
 ## Data description
 This project used a CNC milling machine to perform machining experiments. The CNC machine recorded machining data for different settings of "tool condition", "feed rate", and "clamping pressure". More details about the dataset can be found [here](https://www.kaggle.com/datasets/shasun/tool-wear-detection-in-cnc-mill/data).<br>
@@ -69,6 +70,16 @@ Even though it seems the "yes" results in the `passed_visual_inspection` column 
 It only remains to encode the categorical columns. There was only one non-binary column, Machining_Process, in which I used the Frequency Encoding method to encode the values and saved it to a data frame `frequent_encoding_data`. I also used one-hot encoding for this column and saved it to a different data frame `onehot_encoding_data` to see if it would make difference in the training result.<br>
 For the binary-valued columns, tool_condition, machining_finalized, and passed_visual_inspection, I considered a success as 1 and unsuccess as 0.<br>
 
+## Training Model
+To train the model, I used four different methods, "Random Forest Classifier", "Decision Tree", "XGBoost", and a simple RNN model. Except for the RNN model, I used both data frames `frequent_encoding_data.csv` and `onehot_encoding_data.csv`. Since the accuracy and other metrics were high for both data, I prefer to consider the confusion matrix as my criterion for choosing the best method. You can see the results in the following table.<br>
+
+<div align="center">
+ 
+|Data frame|Random Forest Classifie|Decision Tree|XGBoost| RNN |
+|   :---:  |      :---:            |      :---:  | :---: |:---:|
+|forfrequent_encoding_data|[[2336,   12],<br/> [  10, 2700]]|[[2330,   18],<br/> [  21, 2689]]|[[2346,    2],<br/> [   3, 2707]]|[[ 236, 2211],<br/> [  60, 2551]]
+|onehot_encoding_data     |[[2409,    9],<br/> [  19, 2621]]|[[2397,   21],<br/> [  34, 2606]]|[[2415,    3],<br/> [   8, 2632]]|
+</div>
 
 
 
