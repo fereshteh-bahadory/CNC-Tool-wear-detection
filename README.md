@@ -68,7 +68,7 @@ passed_visual_inspection
 no                        2161  3942
 ----------------------------------------
 ```
-Even though it seems the "yes" results in the `passed_visual_inspection` column imply the same result in `machining_finalized`, both columns are valuable to predict too conditioning of the machine. Therefore, I kept them bot.<br>
+Even though it seems the "yes" results in the `passed_visual_inspection` column imply the same result in `machining_finalized`, both columns are valuable to predict the tool conditioning of the machine. Therefore, I kept them bot.<br>
 It only remains to encode the categorical columns. There was only one non-binary column, Machining_Process, in which I used the Frequency Encoding method to encode the values and saved it to a data frame `frequent_encoding_data`. I also used one-hot encoding for this column and saved it to a different data frame `onehot_encoding_data` to see if it would make difference in the training result.<br>
 For the binary-valued columns, tool_condition, machining_finalized, and passed_visual_inspection, I considered a success as 1 and unsuccess as 0.<br>
 
@@ -76,20 +76,19 @@ For the binary-valued columns, tool_condition, machining_finalized, and passed_v
 To train the model, I used four different methods, "Random Forest Classifier", "Decision Tree", "XGBoost", and a simple RNN model. Except for the RNN model, I used both data frames `frequent_encoding_data.csv` and `onehot_encoding_data.csv`. Since the accuracy and other metrics were high for both data, I prefer to consider the confusion matrix as my criterion for choosing the best method. You can see the results in the following table.<br>
 <div align="center">
  
-|Data frame|Random Forest Classifie|Decision Tree|XGBoost| RNN |
+|Data frame|Random Forest Classifier|Decision Tree|XGBoost| RNN |
 |   :---:  |      :---:            |     :---:   | :---: |:---:|
 |forfrequent_encoding_data|[[2336,   12],<br/> [  10, 2700]]|[[2330,   18],<br/> [  21, 2689]]|[[2346,    2],<br/> [   3, 2707]]|[[ 236, 2211],<br/> [  60, 2551]]
 |onehot_encoding_data     |[[2409,    9],<br/> [  19, 2621]]|[[2397,   21],<br/> [  34, 2606]]|[[2415,    3],<br/> [   8, 2632]]|
 </div>
 
-I also tried to boost models using `GridSearchCV()` and `RandomizedSearchCV()` methods. The result didn't show much difference. Since the results showed the models perfectly fitted, I used feature selection to see if we faced data leakage or not. But the following data results are almost the same. So I think we can rely on our data and models.<br>
+I also tried to boost models using `GridSearchCV()` and `RandomizedSearchCV()` methods. The result didn't show much difference. Since the results showed the models perfectly fitted, I used feature selection to see if we faced data leakage. But the following data results are almost the same. So I think we can rely on our data and models.<br>
 ### Choosing Model
-Based on the results of the confusion matrix listed above, except for the RNN model, which has a weak result, the other models perform very well. In addition, the first data frame, `forfrequent_encoding_data.csv` performs a little better, which means the frequent encoding method improves the efficiency. But it does not change much in this data. However, I prefer to use the first data frame.<br>
+The other models perform very well based on the confusion matrix listed above, except for the RNN model, which has a weak result. In addition, the first data frame, `forfrequent_encoding_data.csv` performs a little better, which means the frequent encoding method improves the efficiency. But it does not change much in this data. However, I prefer to use the first data frame.<br>
 Since the False positive may have more damaging data, based on the confusion matrices, I think the "XGBoost" model is the best choice.
 
 ## Conclusion
-
-
-
+This study aimed to find a model to predict the tool condition of a CNC machine. The data was collected as the machines ran to make a "S" shape in 2" x 2" x 1.5" wax blocks. After working on the data and applying five different models, Data frame, Random Forest Classifier, Decision Tree, XGBoost,  and RNN, relying on the confusion matrix and other metrics, the XGBoost model works more satisfactorily. It is worth mentioning that, we applied Frequent encoding to encode non-binary categorical features. The result can be improved by doing more analysis, for example replacing outliers from data, doing normalization, standardization, or tuning hyperparameters.<br>
+In general, the XGBoost model is highly recommended for this dataset, however, the Random Forest Classifier and Decision Tree also would have a good result. 
 
  
