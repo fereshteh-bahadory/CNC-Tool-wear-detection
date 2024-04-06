@@ -25,7 +25,7 @@ The dataset was gathered at the University of Michigan, which can be found [here
 
 ## EDA
 The first thing to do was to merge all data frames to be able to predict if "tool condition" is worn or unworn. So using `Pandas`, I merged the 18 experimental data frames and added the `train.csv` as their features. As a result, we get a 25285x54-shaped data frame with no missing value. I also dropped the column "material", since for all the experiments the only material used was wax.<br>
-Using the statistical data, gained by `describe()`, and also the box plot, scatter plot, and bar plot of the non-object columns, the data seemed to have outliers. So using the IQR method I saw a big number of outliers in some columns, which in my opinion, could not be the result of the measurement error. Therefore, I didn't replace them.<br>
+Using the statistical data, gained by `describe()`, and also the box plot, scatter plot, and bar plot of the non-object columns, the data seemed to have outliers. So using the [IQR](https://www.analyticsvidhya.com/blog/2022/09/dealing-with-outliers-using-the-iqr-method/) method I saw a big number of outliers in some columns, which in my opinion, could not be the result of the measurement error. Therefore, I didn't replace them.<br>
 The other thing obtained from them was that four columns were completely useless since they contained only one value. The columns are listed below.<br>
 ```
 Z1_CurrentFeedback, Z1_DCBusVoltage, Z1_OutputCurrent, Z1_OutputVoltage, S1_SystemInertia
@@ -82,13 +82,14 @@ To train the model, I used four different methods, "Random Forest Classifier", "
 |onehot_encoding_data     |[[2409,    9],<br/> [  19, 2621]]|[[2397,   21],<br/> [  34, 2606]]|[[2415,    3],<br/> [   8, 2632]]|
 </div>
 
-I also tried to boost models using `GridSearchCV()` and `RandomizedSearchCV()` methods. The result didn't show much difference. Since the results showed the models perfectly fitted, I used feature selection to see if we faced data leakage. But the following data results are almost the same. So I think we can rely on our data and models.<br>
+I also tried to boost models using `GridSearchCV()` and `RandomizedSearchCV()` methods. The result didn't show much difference. Since the results showed the models perfectly fitted, I used feature selection, `mutual_info_score` from `sklear.metrics` to see if we faced data leakage. But the following data results are almost the same. So we can rely on our data and models.<br>
 ### Choosing Model
 The other models perform very well based on the confusion matrix listed above, except for the RNN model, which has a weak result. In addition, the first data frame, `forfrequent_encoding_data.csv` performs a little better, which means the frequent encoding method improves the efficiency. But it does not change much in this data. However, I prefer to use the first data frame.<br>
 Since the False positive may have more damaging data, based on the confusion matrices, I think the "XGBoost" model is the best choice.
 
 ## Conclusion
 This study aimed to find a model to predict the tool condition of a CNC machine. The data was collected as the machines ran to make a "S" shape in 2" x 2" x 1.5" wax blocks. After working on the data and applying five different models, Data frame, Random Forest Classifier, Decision Tree, XGBoost,  and RNN, relying on the confusion matrix and other metrics, the XGBoost model works more satisfactorily. It is worth mentioning that, we applied Frequent encoding to encode non-binary categorical features. The result can be improved by doing more analysis, for example replacing outliers from data, doing normalization, standardization, or tuning hyperparameters.<br>
+The result may be improved by using more materials. It can also be better if the values in the `machining process` are distributed more or less evenly between the different states.<br>
 In general, the XGBoost model is highly recommended for this dataset, however, the Random Forest Classifier and Decision Tree also would have a good result. 
 
  
